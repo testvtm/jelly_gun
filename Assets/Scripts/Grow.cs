@@ -26,8 +26,6 @@ public class Grow : MonoBehaviour {
         startTime = Time.time;
         startScale = 5;
         startMass = rigidbody.mass;
-		print (startTime);
-		print (startScale);
     }
 
     void Update() {
