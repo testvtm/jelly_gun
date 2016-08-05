@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{24BFBC58-5EA8-A514-F664-29047104A51F}</ProjectGuid>
+    <ProjectGuid>{286E4932-E8C0-7C8E-3201-D016B7F928AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\Blob.cs" />
      <Compile Include="Assets\Scripts\ClickToSpawn.cs" />
      <Compile Include="Assets\Scripts\Grow.cs" />
+     <Compile Include="Assets\Shoot.cs" />
      <None Include="Assets\Shaders\Circle.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

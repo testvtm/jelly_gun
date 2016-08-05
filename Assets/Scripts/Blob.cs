@@ -42,18 +42,15 @@ public class Blob : MonoBehaviour {
             referencePoints[i].tag = gameObject.tag;
             referencePoints[i].AddComponent<PropagateCollisions>();
             referencePoints[i].transform.parent = transform;
-            Quaternion rotation =
-                Quaternion.AngleAxis(angle * (i - 1), Vector3.back);
-            referencePoints[i].transform.localPosition =
-                rotation * offsetFromCenter;
+            Quaternion rotation = Quaternion.AngleAxis(angle * (i - 1), Vector3.back);
+            referencePoints[i].transform.localPosition = rotation * offsetFromCenter;
 
             Rigidbody2D body = referencePoints[i].AddComponent<Rigidbody2D>();
             body.fixedAngle = true;
             body.interpolation = rigidbody.interpolation;
             body.collisionDetectionMode = rigidbody.collisionDetectionMode;
 
-            CircleCollider2D collider =
-                referencePoints[i].AddComponent<CircleCollider2D>();
+            CircleCollider2D collider = referencePoints[i].AddComponent<CircleCollider2D>();
             collider.radius = referencePointRadius * transform.localScale.x;
             if (surfaceMaterial != null) {
                 collider.sharedMaterial = surfaceMaterial;
@@ -61,23 +58,19 @@ public class Blob : MonoBehaviour {
 
             AttachWithSpringJoint(referencePoints[i], gameObject);
             if (i > 0) {
-                AttachWithSpringJoint(referencePoints[i],
-                        referencePoints[i - 1]);
+                AttachWithSpringJoint(referencePoints[i], referencePoints[i - 1]);
             }
         }
-        AttachWithSpringJoint(referencePoints[0],
-                referencePoints[referencePointsCount - 1]);
+        AttachWithSpringJoint(referencePoints[0], referencePoints[referencePointsCount - 1]);
 
         IgnoreCollisionsBetweenReferencePoints();
     }
 
     void AttachWithSpringJoint(GameObject referencePoint,
             GameObject connected) {
-        SpringJoint2D springJoint =
-            referencePoint.AddComponent<SpringJoint2D>();
+        SpringJoint2D springJoint = referencePoint.AddComponent<SpringJoint2D>();
         springJoint.connectedBody = connected.GetComponent<Rigidbody2D>();
-        springJoint.connectedAnchor = LocalPosition(referencePoint) -
-            LocalPosition(connected);
+        springJoint.connectedAnchor = LocalPosition(referencePoint) - LocalPosition(connected);
         springJoint.distance = 0;
         springJoint.dampingRatio = springDampingRatio;
         springJoint.frequency = springFrequency;
@@ -142,8 +135,7 @@ public class Blob : MonoBehaviour {
 
             for (int j = 0; j < referencePointsCount; j++) {
                 offsets[i, j] = vertices[i] - LocalPosition(referencePoints[j]);
-                weights[i, j] =
-                    1 / Mathf.Pow(offsets[i, j].magnitude, mappingDetail);
+                weights[i, j] = 1 / Mathf.Pow(offsets[i, j].magnitude, mappingDetail);
                 totalWeight += weights[i, j];
             }
 
@@ -164,8 +156,7 @@ public class Blob : MonoBehaviour {
             vertices[i] = Vector3.zero;
 
             for (int j = 0; j < referencePointsCount; j++) {
-                vertices[i] += weights[i, j] *
-                    (LocalPosition(referencePoints[j]) + offsets[i, j]);
+                vertices[i] += weights[i, j] *  (LocalPosition(referencePoints[j]) + offsets[i, j]);
             }
         }
 

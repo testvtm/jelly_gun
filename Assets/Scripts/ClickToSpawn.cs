@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class ClickToSpawn : MonoBehaviour {
-    public GameObject prefab;
+    public GameObject bullet;
     public float requiredEmptyRadius;
 
     const int Left = 0;
 
-	public GameObject bullet; //starting ball position
+	//public GameObject bullet; //starting ball position
 	public Vector3 bulletPosition; //starting ball position
 
 	private Vector3 throwSpeed = new Vector3(0, 26, 40);
@@ -17,28 +17,32 @@ public class ClickToSpawn : MonoBehaviour {
         if (Input.GetMouseButtonDown(Left)) {
             //Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //if (!Physics2D.OverlapCircle(position, requiredEmptyRadius)) {
-                //Instantiate(prefab, position, Quaternion.identity);
+			//Instantiate(bullet, position, Quaternion.identity);
             //}
-			throwBall();
+			shoot();
         }
     }
 
-	void throwBall() {
+	void shoot() {
+		throwSpeed.y = throwSpeed.y;
+		throwSpeed.z = throwSpeed.z;
 
-			print (123);
-			throwSpeed.y = throwSpeed.y;
-			throwSpeed.z = throwSpeed.z;
-			//prefab = Instantiate(prefab, bulletPosition, Quaternion.identity) as GameObject;
-			Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Instantiate(prefab, bulletPosition, Quaternion.identity);
+		print (123);
+
+		//bullet = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+
+		Instantiate(bullet, mousePosition, Quaternion.identity);
 			//bulletPosition = new Vector3(0, 2, 12);
 
-			//prefab = Instantiate(bullet, bulletPosition, transform.rotation) as GameObject;
+		//bullet = Instantiate(bullet, bulletPosition, transform.rotation) as GameObject;
 
-			//prefab.GetComponent<Rigidbody>().AddForce(throwSpeed, ForceMode.Impulse);
+		//bullet.GetComponent<Rigidbody>().AddForce(throwSpeed, ForceMode.Impulse);
 
-		if (prefab != null && (prefab.transform.position.y <= -2.45))  {
-			//Destroy (prefab);
+		if (bullet != null && (bullet.transform.position.y <= -2.45))  {
+			//Destroy (bullet);
 			isThrown = false;
 			throwSpeed = new Vector3(0, 26, 40);
 		}
