@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ClickToSpawn : MonoBehaviour {
     public GameObject bullet;
+	public GameObject bigBullet;
 	public GameObject gun;
 
     public GameObject holder;
@@ -20,6 +21,11 @@ public class ClickToSpawn : MonoBehaviour {
 
 	void Start() {
 		//Cursor.visible = false;
+		Vector2 cannonPosition = new Vector2(1, 1);
+		for (int i = 1; i <= 2; i++) {
+			GameObject bigBulletClone = Instantiate(bigBullet, cannonPosition, Quaternion.identity) as GameObject;
+			bigBulletClone.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
+		}
 	}
 
     void Update() {
@@ -41,7 +47,7 @@ public class ClickToSpawn : MonoBehaviour {
 		Vector2 cannonPosition = new Vector2(gun.transform.position.x + 1, gun.transform.position.y + 1);
 		GameObject bulletClone = Instantiate(bullet, cannonPosition, Quaternion.identity) as GameObject;
 		bulletClone.GetComponent<Rigidbody2D>().AddForce(mousePosition);
-        bulletClone.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+        bulletClone.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
         bulletClone.transform.SetParent(holder.transform, false);
         //bulletClone.transform.localScale = new Vector2(1, 1);
         //bulletClone.transform.localScale = new Vector2(1, 1);
