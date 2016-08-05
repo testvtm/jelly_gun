@@ -24,8 +24,10 @@ public class Grow : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.isKinematic = true;
         startTime = Time.time;
-        startScale = transform.localScale.x;
+        startScale = 5;
         startMass = rigidbody.mass;
+		print (startTime);
+		print (startScale);
     }
 
     void Update() {
@@ -35,17 +37,15 @@ public class Grow : MonoBehaviour {
                 return;
             }
 
-            float time = Time.time - startTime;
+			//keep Blob and increate width
+            /*float time = Time.time - startTime;
             float growth = Mathf.Log(time / (1 / acceleration) + 1);
             float scale = scaleStep * growth + startScale;
             transform.localScale = new Vector2(scale, scale);
             rigidbody.mass = massStep * growth + startMass;
 
-            Vector3 targetPosition =
-                (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = Vector3.SmoothDamp(transform.position,
-                    targetPosition, ref velocity, movementSmoothTime,
-                    movementMaxSpeed);
+            Vector3 targetPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, movementSmoothTime, movementMaxSpeed);*/
         }
     }
 

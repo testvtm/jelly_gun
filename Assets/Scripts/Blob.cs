@@ -66,8 +66,7 @@ public class Blob : MonoBehaviour {
         IgnoreCollisionsBetweenReferencePoints();
     }
 
-    void AttachWithSpringJoint(GameObject referencePoint,
-            GameObject connected) {
+    void AttachWithSpringJoint(GameObject referencePoint, GameObject connected) {
         SpringJoint2D springJoint = referencePoint.AddComponent<SpringJoint2D>();
         springJoint.connectedBody = connected.GetComponent<Rigidbody2D>();
         springJoint.connectedAnchor = LocalPosition(referencePoint) - LocalPosition(connected);
@@ -103,8 +102,7 @@ public class Blob : MonoBehaviour {
         for (int y = 0; y <= height; y++) {
             for (int x = 0; x <= width; x++) {
                 int v = (width + 1) * y + x;
-                vertices[v] = new Vector3(x / (float)width - 0.5f,
-                        y / (float)height - 0.5f, 0);
+                vertices[v] = new Vector3(x / (float)width - 0.5f, y / (float)height - 0.5f, 0);
                 uv[v] = new Vector2(x / (float)width, y / (float)height);
 
                 if (x < width && y < height) {
@@ -123,6 +121,7 @@ public class Blob : MonoBehaviour {
         Mesh mesh = GetComponent<MeshFilter>().mesh;
         mesh.vertices = vertices;
         mesh.uv = uv;
+		print (triangles);
         mesh.triangles = triangles;
     }
 
