@@ -32,7 +32,7 @@ public class Blob : MonoBehaviour {
     }
 
     void CreateReferencePoints() {
-        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+		Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         referencePoints = new GameObject[referencePointsCount];
         Vector3 offsetFromCenter = ((0.5f - referencePointRadius) * Vector3.up);
         float angle = 360.0f / referencePointsCount;
@@ -121,7 +121,6 @@ public class Blob : MonoBehaviour {
         Mesh mesh = GetComponent<MeshFilter>().mesh;
         mesh.vertices = vertices;
         mesh.uv = uv;
-		print (triangles);
         mesh.triangles = triangles;
     }
 

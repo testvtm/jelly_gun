@@ -48,7 +48,6 @@
      <Compile Include="Assets\Scripts\Blob.cs" />
      <Compile Include="Assets\Scripts\ClickToSpawn.cs" />
      <Compile Include="Assets\Scripts\Grow.cs" />
-     <Compile Include="Assets\Shoot.cs" />
      <None Include="Assets\Shaders\Circle.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

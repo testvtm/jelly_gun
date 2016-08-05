@@ -18,14 +18,14 @@ public class ClickToSpawn : MonoBehaviour {
 	public Vector2 bulletPosition; //starting ball position
 	float shootForce = 10;
     int numBullet = 10;
+	int lv = 1;
 
 	void Start() {
 		//Cursor.visible = false;
-		Vector2 cannonPosition = new Vector2(1, 1);
-		for (int i = 1; i <= 2; i++) {
-			GameObject bigBulletClone = Instantiate(bigBullet, cannonPosition, Quaternion.identity) as GameObject;
-			bigBulletClone.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
-		}
+		GameObject bigBulletClone1 = Instantiate(bigBullet, new Vector2(0, gun.transform.position.y-1), Quaternion.identity) as GameObject;
+		bigBulletClone1.transform.localScale = new Vector3(1.5f, 1.4f, 1.5f);
+		GameObject bigBulletClone2 = Instantiate(bigBullet, new Vector2(4, gun.transform.position.y-1), Quaternion.identity) as GameObject;
+		bigBulletClone2.transform.localScale = new Vector3(1.5f, 1.4f, 1.5f);
 	}
 
     void Update() {
@@ -46,9 +46,17 @@ public class ClickToSpawn : MonoBehaviour {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 cannonPosition = new Vector2(gun.transform.position.x + 1, gun.transform.position.y + 1);
 		GameObject bulletClone = Instantiate(bullet, cannonPosition, Quaternion.identity) as GameObject;
-		bulletClone.GetComponent<Rigidbody2D>().AddForce(mousePosition);
-        bulletClone.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+        bulletClone.transform.localScale = new Vector3(0.45f, 0.4f, 0.45f);
         bulletClone.transform.SetParent(holder.transform, false);
+
+		float speed = .1f;
+		float moveSpeed = 10f;
+		float jumpSpeed = 10f;
+
+		//bulletClone.GetComponent<Rigidbody2D>().AddForce(Vector2.up * moveSpeed);
+		print("x = " + mousePosition.x);
+		print("y = " + mousePosition.y);
+
         //bulletClone.transform.localScale = new Vector2(1, 1);
         //bulletClone.transform.localScale = new Vector2(1, 1);
         //print("x = " + gun.transform.position.x+ 1);
@@ -79,4 +87,6 @@ public class ClickToSpawn : MonoBehaviour {
 		//int cursorSizeY = 25;
 		//GUI.DrawTexture(new Rect(Input.mousePosition.x-cursorSizeX/2 + cursorSizeX/2, (Screen.height-Input.mousePosition.y+2)-cursorSizeY/2 + cursorSizeY/2, cursorSizeX, cursorSizeY), cursorTexture);
 	//}
+
+
 }
