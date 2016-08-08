@@ -22,9 +22,9 @@ public class ClickToSpawn : MonoBehaviour {
 
 	void Start() {
 		GameObject bigBulletClone1 = Instantiate(bigBullet, new Vector2(0, gun.transform.position.y-1), Quaternion.identity) as GameObject;
-		bigBulletClone1.transform.localScale = new Vector3(1.5f, 1.4f, 1.5f);
+		bigBulletClone1.transform.localScale = new Vector3(1f, 0.9f, 1f);
 		GameObject bigBulletClone2 = Instantiate(bigBullet, new Vector2(4, gun.transform.position.y-1), Quaternion.identity) as GameObject;
-		bigBulletClone2.transform.localScale = new Vector3(1.5f, 1.4f, 1.5f);
+		bigBulletClone2.transform.localScale = new Vector3(1f, 0.9f, 1f);
 	}
 
     void Update() {
@@ -45,24 +45,16 @@ public class ClickToSpawn : MonoBehaviour {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 bulletStartPosition = new Vector2(gun.transform.position.x + 1, gun.transform.position.y + 1);
 		GameObject bulletClone = Instantiate(bullet, bulletStartPosition, Quaternion.identity) as GameObject;
-        bulletClone.transform.localScale = new Vector3(0.45f, 0.4f, 0.45f);
+        bulletClone.transform.localScale = new Vector3(0.6f, 0.55f, 0.6f);
         bulletClone.transform.SetParent(holder.transform, false);
-		bulletClone.GetComponent<Rigidbody2D> ().velocity = mousePosition;
-	
-		//Vector2 velocity = newPosition - bulletClone.transform.position;
-		//bulletClone.GetComponent<Rigidbody2D>().AddForce (velocity, ForceMode2D.Force);
-		//bulletClone.GetComponent<Rigidbody2D> ().velocity = newPosition;
-		//bulletClone.GetComponent<Rigidbody2D>().velocity = calculateBestThrowSpeed(bulletStartPosition, mousePosition, 5);
-
+		bulletClone.GetComponent<Rigidbody2D>().velocity = calculateBestThrowSpeed(bulletStartPosition, mousePosition, 0.5f);
     }
     
-	private Vector3 calculateBestThrowSpeed(Vector2 origin, Vector2 target, float timeToTarget) {
+	private Vector2 calculateBestThrowSpeed(Vector2 origin, Vector2 target, float timeToTarget) {
 		// calculate vectors
 		Vector2 toTarget = target - origin;
 		Vector2 toTargetXZ = toTarget;
 		toTargetXZ.y = 0;
-		//print ("target = " + target);
-		//print ("origin = " + origin);
 
 		// calculate xz and y
 		float y = toTarget.y;
@@ -73,7 +65,7 @@ public class ClickToSpawn : MonoBehaviour {
 		// so xz = v0xz * t => v0xz = xz / t
 		// and y = v0y * t - 1/2 * gravity * t * t => v0y * t = y + 1/2 * gravity * t * t => v0y = y / t + 1/2 * gravity * t
 		float t = timeToTarget;
-		float v0y = y / t + 0.5f * Physics.gravity.magnitude * t;
+		float v0y = y / t + 0.3f * Physics.gravity.magnitude * t;
 		float v0xz = xz / t;
 
 		// create result vector for calculated starting speeds
