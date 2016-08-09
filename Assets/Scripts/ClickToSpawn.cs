@@ -22,9 +22,9 @@ public class ClickToSpawn : MonoBehaviour {
 
 	void Start() {
 		GameObject bigBulletClone1 = Instantiate(bigBullet, new Vector2(0, gun.transform.position.y-1), Quaternion.identity) as GameObject;
-		bigBulletClone1.transform.localScale = new Vector3(1f, 0.9f, 1f);
+		bigBulletClone1.transform.localScale = new Vector3(1f, 0.95f, 1f);
 		GameObject bigBulletClone2 = Instantiate(bigBullet, new Vector2(4, gun.transform.position.y-1), Quaternion.identity) as GameObject;
-		bigBulletClone2.transform.localScale = new Vector3(1f, 0.9f, 1f);
+		bigBulletClone2.transform.localScale = new Vector3(1f, 0.95f, 1f);
 	}
 
     void Update() {
@@ -43,7 +43,7 @@ public class ClickToSpawn : MonoBehaviour {
     
 	void shoot() {
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector2 bulletStartPosition = new Vector2(gun.transform.position.x + 1, gun.transform.position.y + 1);
+		Vector2 bulletStartPosition = new Vector2(gun.transform.position.x, gun.transform.position.y);
 		GameObject bulletClone = Instantiate(bullet, bulletStartPosition, Quaternion.identity) as GameObject;
         bulletClone.transform.localScale = new Vector3(0.6f, 0.55f, 0.6f);
         bulletClone.transform.SetParent(holder.transform, false);
