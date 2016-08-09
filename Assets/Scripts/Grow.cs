@@ -31,7 +31,7 @@ public class Grow : MonoBehaviour {
     void Update() {
         if (growing) {
             if (Input.GetMouseButtonUp(Left)) {
-                StopGrowing();
+//                StopGrowing();
                 return;
             }
 
