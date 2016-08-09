@@ -10,7 +10,7 @@ public class GunScript : MonoBehaviour
         Vector3 pos = Camera.main.WorldToScreenPoint(barrel.transform.position);
         Vector3 dir = Input.mousePosition - pos;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        if ((angle >= -20 && angle <= 130)) {
+        if ((angle >= -20 && angle <= 150)) {
             barrel.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
