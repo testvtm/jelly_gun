@@ -7,7 +7,7 @@ public class Blob : MonoBehaviour {
             transform.parent.SendMessage("OnCollisionEnter2D", collision);
         }
     }
-
+    public int id = 1;
     public int width = 1;
     public int height = 1;
     public int referencePointsCount = 12;
@@ -165,5 +165,16 @@ public class Blob : MonoBehaviour {
 
     Vector3 LocalPosition(GameObject obj) {
         return transform.InverseTransformPoint(obj.transform.position);
+    }
+
+    void OnTriggerEnter2D(Collider2D collidedObject) {
+        if (collidedObject.tag == "merge")
+        {
+            GameObject bl1 = GameObject.Find("Big Blob 1");
+            GameObject bl2 = GameObject.Find("Big Blob 2");
+            //bl1.SetActive(false);
+            Destroy(bl1);
+            bl2.transform.localScale = new Vector3(3f, 3f, 3f);
+        }
     }
 }

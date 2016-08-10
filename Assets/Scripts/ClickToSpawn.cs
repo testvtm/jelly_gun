@@ -24,16 +24,14 @@ public class ClickToSpawn : MonoBehaviour {
 	float nextTime = 0.0f;
 
 	void Start() {
-
-		GameObject bigBulletClone1 = Instantiate(bigBullet, new Vector2(0, -4.2f), Quaternion.identity) as GameObject;
-		bigBulletClone1.transform.localScale = new Vector3(1f, 0.95f, 1f);
-		GameObject bigBulletClone2 = Instantiate(bigBullet, new Vector2(4, -4.2f), Quaternion.identity) as GameObject;
-		bigBulletClone2.transform.localScale = new Vector3(1f, 0.95f, 1f);
+//		GameObject bigBulletClone1 = Instantiate(bigBullet, new Vector2(0, -4.2f), Quaternion.identity) as GameObject;
+//		bigBulletClone1.transform.localScale = new Vector3(1f, 0.95f, 1f);
+//		GameObject bigBulletClone2 = Instantiate(bigBullet, new Vector2(4, -4.2f), Quaternion.identity) as GameObject;
+//		bigBulletClone2.transform.localScale = new Vector3(1f, 0.95f, 1f);
 	}
 
     void Update()
     {
-
 		/*if (Input.GetMouseButtonDown(Left) && Time.time > nextTime)
         {
             Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -87,5 +85,4 @@ public class ClickToSpawn : MonoBehaviour {
 
 		return result;
 	}
-
 }

@@ -54,8 +54,8 @@ public class GunScript : MonoBehaviour
         Vector3 vel = GetForceFrom(ball.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg;
         barrel.transform.eulerAngles = new Vector3(0, 0, angle);
-        Rigidbody2D rigi = ball.GetComponent<Rigidbody2D>();
-        setTrajectoryPoints(top.transform.position, vel / rigi.mass);
+//        Rigidbody2D rigi = ball.GetComponent<Rigidbody2D>();
+//        setTrajectoryPoints(top.transform.position, vel / rigi.mass);
     }
 
     void shoot()
@@ -67,13 +67,13 @@ public class GunScript : MonoBehaviour
         pos.z = 1;
         bl.transform.position = pos;
         Rigidbody2D rigi = bl.GetComponent<Rigidbody2D>();
-        //rigi.isKinematic = false
+        rigi.isKinematic = true;
         rigi.gravityScale = 0.0f;
-        rigi.AddForce(Vector3.up * 10 * Time.deltaTime, ForceMode2D.Impulse);
+        //rigi.AddForce(Vector3.up * 10 * Time.deltaTime, ForceMode2D.Impulse);
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        rigi.velocity = GetForceFrom(pos, mousePosition);
 
-        
-        if (holder.transform.childCount > numBullet)
-        {
+        if (holder.transform.childCount > numBullet) {
             Transform child = holder.transform.GetChild(0);
             GameObject.Destroy(child.gameObject);
         }
@@ -94,7 +94,7 @@ public class GunScript : MonoBehaviour
         for (int i = 0; i < numOfTrajectoryPoints; i++)
         {
             float dx = velocity * fTime * Mathf.Cos(angle * Mathf.Deg2Rad);
-            float dy = velocity * fTime * Mathf.Sin(angle * Mathf.Deg2Rad) - (Physics2D.gravity.magnitude * fTime * fTime / 0.2f);
+            float dy = velocity * fTime * Mathf.Sin(angle * Mathf.Deg2Rad) - (Physics2D.gravity.magnitude * fTime * fTime / 0.6f);
             Vector3 pos = new Vector3(pStartPosition.x + dx, pStartPosition.y + dy, 0);
             trajectoryPoints[i].transform.position = pos;
             trajectoryPoints[i].SetActive(true);
@@ -109,4 +109,31 @@ public class GunScript : MonoBehaviour
         thescale.y = -thescale.y;
         //barrel.transform.localScale = thescale;
     }
+
+    private Vector2 calculateBestThrowSpeed(Vector2 origin, Vector2 target, float timeToTarget)
+        {
+    		// calculate vectors
+    		Vector2 toTarget = target - origin;
+    		Vector2 toTargetXZ = toTarget;
+    		toTargetXZ.y = 0;
+
+    		// calculate xz and y
+    		float y = toTarget.y;
+    		float xz = toTargetXZ.magnitude;
+
+    		// calculate starting speeds for xz and y. Physics forumulase deltaX = v0 * t + 1/2 * a * t * t
+    		// where a is "-gravity" but only on the y plane, and a is 0 in xz plane.
+    		// so xz = v0xz * t => v0xz = xz / t
+    		// and y = v0y * t - 1/2 * gravity * t * t => v0y * t = y + 1/2 * gravity * t * t => v0y = y / t + 1/2 * gravity * t
+    		float t = timeToTarget;
+    		float v0y = y / t + 0.5f * Physics.gravity.magnitude * t;
+    		float v0xz = xz / t;
+
+    		// create result vector for calculated starting speeds
+    		Vector2 result = toTargetXZ.normalized;        // get direction of xz but with magnitude 1
+    		result *= v0xz;                                // set magnitude of xz to v0xz (starting speed in xz plane)
+    		result.y = v0y;                                // set y to v0y (starting speed of y plane)
+
+    		return result;
+    	}
 }
