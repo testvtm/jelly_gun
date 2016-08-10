@@ -13,7 +13,7 @@ public class GunScript : MonoBehaviour
     private GameObject ball;
     private GameObject bl;
     private bool isPressed, isBallThrown;
-    private float power = 3000;
+    private float power = 5;
     int numBullet = 10;
     private int numOfTrajectoryPoints = 30;
     private List<GameObject> trajectoryPoints;
@@ -62,15 +62,16 @@ public class GunScript : MonoBehaviour
     {
         bl = (GameObject)Instantiate(bullet);
         bl.SetActive(true);
+        bl.transform.SetParent(holder.transform, false);
         Vector3 pos = top.transform.position;
         pos.z = 1;
         bl.transform.position = pos;
         Rigidbody2D rigi = bl.GetComponent<Rigidbody2D>();
-        rigi.isKinematic = false;
+        //rigi.isKinematic = false
         rigi.gravityScale = 0.0f;
-        rigi.AddForce(GetForceFrom(bl.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))*5* Time.deltaTime, ForceMode2D.Impulse);
+        rigi.AddForce(Vector3.up * 10 * Time.deltaTime, ForceMode2D.Impulse);
 
-        bl.transform.SetParent(holder.transform, false);
+        
         if (holder.transform.childCount > numBullet)
         {
             Transform child = holder.transform.GetChild(0);
