@@ -13,7 +13,7 @@ public class GunScript : MonoBehaviour
     private GameObject ball;
     private GameObject bl;
     private bool isPressed, isBallThrown;
-    private float power = 5;
+    private float power = 2;
     int numBullet = 10;
     private int numOfTrajectoryPoints = 30;
     private List<GameObject> trajectoryPoints;
@@ -51,9 +51,20 @@ public class GunScript : MonoBehaviour
                 //throwBall();
         }
         // when mouse button is pressed, cannon is rotated as per mouse movement and projectile trajectory path is displayed.
-        Vector3 vel = GetForceFrom(ball.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector2 bulletStartPosition = new Vector2(gunTop.transform.position.x, gunTop.transform.position.y);
+
+
+        Vector3 vel = GetForceFrom(ball.transform.position, mousePosition);
         float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg;
-        barrel.transform.eulerAngles = new Vector3(0, 0, angle);
+        if ((angle >= -9 && angle <= 85)) {
+        print(angle);
+            //barrel.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            barrel.transform.eulerAngles = new Vector3(0, 0, angle);
+        }
+
 //        Rigidbody2D rigi = ball.GetComponent<Rigidbody2D>();
 //        setTrajectoryPoints(top.transform.position, vel / rigi.mass);
     }
