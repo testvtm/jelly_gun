@@ -33,11 +33,6 @@ public class ClickToSpawn : MonoBehaviour {
     void Update()
     {
 
-        RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
-        if (hit && hit.transform.tag == "bottomDetect")
-        {
-            print("đậu");
-        }
         /*if (Input.GetMouseButtonDown(Left) && Time.time > nextTime)
         {
             Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
