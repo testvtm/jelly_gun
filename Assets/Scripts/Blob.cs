@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Blob : MonoBehaviour {
     private class PropagateCollisions : MonoBehaviour {
@@ -15,6 +16,8 @@ public class Blob : MonoBehaviour {
     public float mappingDetail = 10;
     public float springDampingRatio = 0;
     public float springFrequency = 2;
+    private float scalePr = 1.0f;
+
     public PhysicsMaterial2D surfaceMaterial;
 
     GameObject[] referencePoints;
@@ -166,15 +169,44 @@ public class Blob : MonoBehaviour {
     Vector3 LocalPosition(GameObject obj) {
         return transform.InverseTransformPoint(obj.transform.position);
     }
-
+    
     void OnTriggerEnter2D(Collider2D collidedObject) {
         if (collidedObject.tag == "merge")
         {
-            GameObject bl1 = GameObject.Find("Big Blob 1");
-            GameObject bl2 = GameObject.Find("Big Blob 2");
-            //bl1.SetActive(false);
-            Destroy(bl1);
-            bl2.transform.localScale = new Vector3(3f, 3f, 3f);
+            scalePr += 0.01f;
+            
+
+            if (!collidedObject.transform.parent)
+                return;
+            else
+            {
+                SettingScript.score += 1;
+                GameObject blHit = collidedObject.transform.parent.gameObject as GameObject;
+                blHit.transform.localScale = new Vector3(scalePr, scalePr, scalePr) + blHit.transform.localScale;
+                Destroy(this.gameObject);
+            }
+            if (SettingScript.score == SettingScript.goal(SettingScript.currentScene))
+            {
+                //StartCoroutine(WailtAndPlay());
+                if (SettingScript.currentScene == SettingScript.SCENES.LEVEL1)
+                {
+                    SceneManager.LoadScene("Level2");
+                }
+                else
+                {
+                    SceneManager.LoadScene("Level1");
+                }
+            }
+
+
+
         }
+
     }
+    IEnumerator WailtAndPlay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("Level2");
+    }
+
 }

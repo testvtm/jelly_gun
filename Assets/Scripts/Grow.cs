@@ -20,18 +20,18 @@ public class Grow : MonoBehaviour {
 
     void Start() {
         //GetComponent<Renderer>().material.color = HSV(Random.value, 0.99f, 0.99f);
-        transform = GetComponent<Transform>();
-        rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.isKinematic = true;
-        startTime = Time.time;
-        startScale = 5;
-        startMass = rigidbody.mass;
+        //transform = GetComponent<Transform>();
+        //rigidbody = GetComponent<Rigidbody2D>();
+        //rigidbody.isKinematic = true;
+        //startTime = Time.time;
+        //startScale = 5;
+        //startMass = rigidbody.mass;
     }
 
     void Update() {
         if (growing) {
             if (Input.GetMouseButtonUp(Left)) {
-                StopGrowing();
+                //StopGrowing();
                 return;
             }
 
@@ -48,13 +48,13 @@ public class Grow : MonoBehaviour {
     }
 
     void StopGrowing() {
-        growing = false;
-        rigidbody.isKinematic = false;
+        //growing = false;
+        //rigidbody.isKinematic = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (growing) {
-            StopGrowing();
+            //StopGrowing();
         }
     }
 

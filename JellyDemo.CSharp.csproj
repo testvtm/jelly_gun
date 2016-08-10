@@ -68,6 +68,10 @@
     <Compile Include="Assets\Scripts\ClickToSpawn.cs" />
     <Compile Include="Assets\Scripts\Grow.cs" />
     <Compile Include="Assets\Scripts\GunScript.cs" />
+    <Compile Include="Assets\Scripts\Level1Script.cs" />
+    <Compile Include="Assets\Scripts\Level2Script.cs" />
+    <Compile Include="Assets\Scripts\MG.cs" />
+    <Compile Include="Assets\Scripts\SettingScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Circle.shader" />

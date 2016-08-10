@@ -32,7 +32,13 @@ public class ClickToSpawn : MonoBehaviour {
 
     void Update()
     {
-		/*if (Input.GetMouseButtonDown(Left) && Time.time > nextTime)
+
+        RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.zero);
+        if (hit && hit.transform.tag == "bottomDetect")
+        {
+            print("đậu");
+        }
+        /*if (Input.GetMouseButtonDown(Left) && Time.time > nextTime)
         {
             Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (!Physics2D.OverlapCircle(position, requiredEmptyRadius)) {
@@ -44,6 +50,13 @@ public class ClickToSpawn : MonoBehaviour {
                 }
             }
 		}*/
+    }
+    private float scalePr = 1.0f;
+    void createBlob(Vector3 pos)
+    {
+        scalePr += 0.2f;
+        GameObject bl = Instantiate(bigBullet, pos, Quaternion.identity) as GameObject;
+        bl.transform.localScale = new Vector3(scalePr, scalePr, scalePr);
     }
     
 	void shoot() {
